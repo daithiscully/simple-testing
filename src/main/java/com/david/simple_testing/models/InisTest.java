@@ -63,7 +63,7 @@ public class InisTest {
 
 	@Override
 	public String toString() {
-		return "InisTest [id=" + id + ", name=" + name + ", description=" + description + ", steps=" + steps + "]";
+		return "\nInisTest [id=" + id + ", name=" + name + ", description=" + description + ", steps=" + steps + "]\n";
 	}
 
 }
