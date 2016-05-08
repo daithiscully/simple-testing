@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 import com.david.simple_testing.models.InisTest;
 import com.david.simple_testing.models.Step;
 
-@Test
 public class CreateTestWithSteps {
 
 	private InisTest t1;

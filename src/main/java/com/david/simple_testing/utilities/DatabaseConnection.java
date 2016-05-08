@@ -100,8 +100,8 @@ public class DatabaseConnection {
 		rs.close();
 	}
 	
-	public ArrayList<String> readAllInisTests(String sql) throws SQLException {
-		ArrayList<String> results = new ArrayList<>();
+	public ArrayList<InisTest> readAllInisTests(String sql) throws SQLException {
+		ArrayList<InisTest> results = new ArrayList<>();
 		InisTest t1;
 		
 		System.out.println("Creating statement...");
@@ -114,7 +114,7 @@ public class DatabaseConnection {
 			String testName = rs.getString("test_name");
 			String testDescription = rs.getString("test_description");
 			t1 = new InisTest(id, testName, testDescription);
-
+			results.add(t1);
 		}
 		rs.close();
 		
