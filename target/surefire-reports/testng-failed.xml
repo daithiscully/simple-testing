@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" verbose="0" name="Failed suite [Suite]" parallel="methods">
+  <test name="CreateTestWithSteps">
+    <classes>
+      <class name="com.david.simple_testing.modelTests.CreateTestWithSteps"/>
+    </classes>
+  </test> <!-- CreateTestWithSteps -->
+  <test name="DatabaseConnectionTest">
+    <classes>
+      <class name="com.david.simple_testing.utilitiesTests.DatabaseConnectionTest"/>
+    </classes>
+  </test> <!-- DatabaseConnectionTest -->
+</suite> <!-- Failed suite [Suite] -->
