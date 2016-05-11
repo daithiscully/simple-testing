@@ -8,23 +8,23 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.david.simple_testing.models.InisTest;
-import com.david.simple_testing.utilities.DatabaseConnection;
+import com.david.simple_testing.models.Project;
+import com.david.simple_testing.utilities.DatabaseConnection2;
 
-public class DatabaseConnectionTest {
+public class ReadAllDataFromDatabaseTest {
 
 	private final String IP = "localhost";
 	private final String DATABASE = "simpletesting";
 	private final String USERNAME = "testuser";
 	private final String PASSWORD = "password";
 
-	DatabaseConnection dbc;
+	DatabaseConnection2 dbc;
 
 	@BeforeClass
 	public void testSetup() {
 		System.out.println("Entered the test setup...");
 
-		dbc = new DatabaseConnection();
+		dbc = new DatabaseConnection2();
 	}
 
 	@AfterClass
@@ -47,22 +47,23 @@ public class DatabaseConnectionTest {
 	}
 
 	@Test(dependsOnMethods = { "testDatabaseKeepConnectionOpen" })
-	public void testDatabaseRead() {
-		System.out.println("Entered the test testDatabaseRead...");
+	public void testDatabaseReadProjects() {
+		System.out.println("Entered the test testDatabaseReadProjects...");
+		int projectId = 1;
 
-		ArrayList<InisTest> returnedTests = new ArrayList<>();
+		ArrayList<Project> returnedProjectss = new ArrayList<>();
 		try {
-			returnedTests = dbc.readAllInisTests("SELECT * FROM InisTests");
-			System.out.println("Returned Tests: " + returnedTests);
+			returnedProjectss = dbc.readAllProjects(projectId);
+			System.out.println("Returned Projects: " + returnedProjectss);
 		} catch (SQLException e) {
 			System.out.println("Got an SQL Exception\n ");
 			e.printStackTrace();
 		}
-		
-		Assert.assertTrue(!returnedTests.isEmpty());
+
+		Assert.assertTrue(!returnedProjectss.isEmpty());
 	}
 
-	@Test(dependsOnMethods = { "testDatabaseRead" })
+	@Test(dependsOnMethods = { "testDatabaseReadProjects" })
 	public void testDatabaseDisconnect() {
 		System.out.println("Entered the test testDatabaseDisconnect...");
 		dbc.disconnect();

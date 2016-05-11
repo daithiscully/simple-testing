@@ -2,25 +2,25 @@ package com.david.simple_testing.models;
 
 import java.util.ArrayList;
 
-public class InisTest {
+public class Suite {
 
 	private int id;
-	private Suite suite;
+	private Project project;
 	private String name;
 	private String description;
-	private ArrayList<Step> steps;
+	private ArrayList<InisTest> tests;
 
-	public InisTest() {
-
+	public Suite() {
+		super();
 	}
 
-	public InisTest(int id, Suite suite, String name, String description, ArrayList<Step> steps) {
+	public Suite(int id, Project project, String name, String description, ArrayList<InisTest> tests) {
 		super();
-		this.setId(id);
-		this.setSuite(suite);
-		this.setName(name);
-		this.setDescription(description);
-		this.setSteps(steps);
+		this.id = id;
+		this.project = project;
+		this.name = name;
+		this.description = description;
+		this.tests = tests;
 	}
 
 	public int getId() {
@@ -31,12 +31,12 @@ public class InisTest {
 		this.id = id;
 	}
 
-	public Suite getSuite() {
-		return suite;
+	public Project getProject() {
+		return project;
 	}
 
-	public void setSuite(Suite suite) {
-		this.suite = suite;
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	public String getName() {
@@ -55,12 +55,12 @@ public class InisTest {
 		this.description = description;
 	}
 
-	public ArrayList<Step> getSteps() {
-		return steps;
+	public ArrayList<InisTest> getTests() {
+		return tests;
 	}
 
-	public void setSteps(ArrayList<Step> steps) {
-		this.steps = steps;
+	public void setTests(ArrayList<InisTest> tests) {
+		this.tests = tests;
 	}
 
 	@Override
@@ -70,8 +70,8 @@ public class InisTest {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((steps == null) ? 0 : steps.hashCode());
-		result = prime * result + ((suite == null) ? 0 : suite.hashCode());
+		result = prime * result + ((project == null) ? 0 : project.hashCode());
+		result = prime * result + ((tests == null) ? 0 : tests.hashCode());
 		return result;
 	}
 
@@ -83,7 +83,7 @@ public class InisTest {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		InisTest other = (InisTest) obj;
+		Suite other = (Suite) obj;
 		if (description == null) {
 			if (other.description != null)
 				return false;
@@ -96,23 +96,23 @@ public class InisTest {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (steps == null) {
-			if (other.steps != null)
+		if (project == null) {
+			if (other.project != null)
 				return false;
-		} else if (!steps.equals(other.steps))
+		} else if (!project.equals(other.project))
 			return false;
-		if (suite == null) {
-			if (other.suite != null)
+		if (tests == null) {
+			if (other.tests != null)
 				return false;
-		} else if (!suite.equals(other.suite))
+		} else if (!tests.equals(other.tests))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "InisTest [id=" + id + ", suite=" + suite + ", name=" + name + ", description=" + description
-				+ ", steps=" + steps + "]";
+		return "Suite [id=" + id + ", project name=" + project.getName() + ", name=" + name + ", description="
+				+ description + ", tests=" + tests.toString() + "]";
 	}
 
 }

@@ -1,0 +1,13 @@
+## Create a user in MySQL
+create user 'testuser'@'localhost' identified by 'password';
+
+## Grant permissions to the user
+
+grant all on simpletesting.* to 'testuser';
+
+
+
+
+						  Browser
+						/	
+Project -> Suite -> Test -> Step

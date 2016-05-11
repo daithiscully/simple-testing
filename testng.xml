@@ -6,9 +6,14 @@
 			<class name="com.david.simple_testing.modelTests.CreateTestWithSteps" />
 		</classes>
 	</test> <!-- Test -->
-	<test name="DatabaseConnectionTest">
+	<!-- <test name="DatabaseConnectionTest">
 		<classes>
 			<class name="com.david.simple_testing.utilitiesTests.DatabaseConnectionTest" />
+		</classes>
+	</test> -->
+	<test name="ReadAllDataFromDatabaseTest">
+		<classes>
+			<class name="com.david.simple_testing.utilitiesTests.ReadAllDataFromDatabaseTest" />
 		</classes>
 	</test>
 </suite> <!-- Suite -->

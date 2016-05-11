@@ -31,7 +31,7 @@ public class CreateTestWithSteps {
 
 	@Test
 	public void createTest() {
-		t1 = new InisTest(testId, testName, testDescription, testStepsData);
+		t1 = new InisTest(testId, null, testName, testDescription, testStepsData);
 	}
 
 	@Test(dependsOnMethods = "createTest")
@@ -54,10 +54,10 @@ public class CreateTestWithSteps {
 	}
 
 	public ArrayList<Step> getSomeSteps() {
-		Step s1 = new Step(1, "Wait 5 seconds");
-		Step s2 = new Step(2, "Go to URL", "http://www.google.ie");
-		Step s3 = new Step(3, "Click Button", "/some/sort/of/xpath");
-		Step s4 = new Step(4, "Enter Text", "/some/sort/of/xpath", "This is text to be entered...");
+		Step s1 = new Step(1, t1, "Wait 5 seconds", "", "");
+		Step s2 = new Step(2, t1, "Go to URL", "http://www.google.ie", "");
+		Step s3 = new Step(3, t1, "Click Button", "/some/sort/of/xpath", "");
+		Step s4 = new Step(4, t1, "Enter Text", "/some/sort/of/xpath", "This is text to be entered...");
 
 		ArrayList<Step> steps = new ArrayList<Step>();
 		steps.add(s1);

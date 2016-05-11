@@ -1,28 +1,21 @@
 package com.david.simple_testing.models;
 
-public class Step extends InisTest{
+public class Step extends InisTest {
 
 	private int id;
+	private InisTest test;
 	private String action;
 	private String actionData1;
 	private String actionData2;
 
-	public Step(int id, String action) {
+	public Step() {
 		super();
-		this.id = id;
-		this.action = action;
 	}
 
-	public Step(int id, String action, String actionData1) {
+	public Step(int id, InisTest test, String action, String actionData1, String actionData2) {
 		super();
 		this.id = id;
-		this.action = action;
-		this.actionData1 = actionData1;
-	}
-
-	public Step(int id, String action, String actionData1, String actionData2) {
-		super();
-		this.id = id;
+		this.test = test;
 		this.action = action;
 		this.actionData1 = actionData1;
 		this.actionData2 = actionData2;
@@ -34,6 +27,14 @@ public class Step extends InisTest{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public InisTest getTest() {
+		return test;
+	}
+
+	public void setTest(InisTest test) {
+		this.test = test;
 	}
 
 	public String getAction() {
@@ -59,17 +60,16 @@ public class Step extends InisTest{
 	public void setActionData2(String actionData2) {
 		this.actionData2 = actionData2;
 	}
-	
-	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((action == null) ? 0 : action.hashCode());
 		result = prime * result + ((actionData1 == null) ? 0 : actionData1.hashCode());
 		result = prime * result + ((actionData2 == null) ? 0 : actionData2.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((test == null) ? 0 : test.hashCode());
 		return result;
 	}
 
@@ -77,7 +77,7 @@ public class Step extends InisTest{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -99,13 +99,18 @@ public class Step extends InisTest{
 			return false;
 		if (id != other.id)
 			return false;
+		if (test == null) {
+			if (other.test != null)
+				return false;
+		} else if (!test.equals(other.test))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "\nStep [id=" + id + ", action=" + action + ", actionData1=" + actionData1 + ", actionData2=" + actionData2
-				+ "]\n";
+		return "Step [id=" + id + ", test=" + test + ", action=" + action + ", actionData1=" + actionData1
+				+ ", actionData2=" + actionData2 + "]";
 	}
-	
+
 }
