@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.david.simple_testing.models.Project;
+import com.david.simple_testing.models.Suite;
 import com.david.simple_testing.utilities.DatabaseConnection2;
 
 public class ReadAllDataFromDatabaseTest {
@@ -19,6 +20,7 @@ public class ReadAllDataFromDatabaseTest {
 	private final String PASSWORD = "password";
 
 	DatabaseConnection2 dbc;
+	Project returnedProject = null;
 
 	@BeforeClass
 	public void testSetup() {
@@ -47,23 +49,38 @@ public class ReadAllDataFromDatabaseTest {
 	}
 
 	@Test(dependsOnMethods = { "testDatabaseKeepConnectionOpen" })
-	public void testDatabaseReadProjects() {
-		System.out.println("Entered the test testDatabaseReadProjects...");
+	public void testDatabaseReadProjectById() {
+		System.out.println("Entered the test testDatabaseReadProjectById...");
 		int projectId = 1;
-
-		ArrayList<Project> returnedProjectss = new ArrayList<>();
+		
 		try {
-			returnedProjectss = dbc.readAllProjects(projectId);
-			System.out.println("Returned Projects: " + returnedProjectss);
+			returnedProject = dbc.readProjectById(projectId);
+			System.out.println("Returned Project: " + returnedProject);
 		} catch (SQLException e) {
 			System.out.println("Got an SQL Exception\n ");
 			e.printStackTrace();
 		}
 
-		Assert.assertTrue(!returnedProjectss.isEmpty());
+		Assert.assertTrue(returnedProject != null);
+	}
+	
+	@Test(dependsOnMethods = { "testDatabaseReadProjectById" })
+	public void testDatabaseReadSuitesByProject() {
+		System.out.println("Entered the test testDatabaseReadProjectById...");
+		ArrayList<Suite> returnedSuites = new ArrayList<>();
+		
+		try {
+			returnedSuites = dbc.readAllSuitesByProject(returnedProject);
+			System.out.println("Returned Suites: " + returnedSuites);
+		} catch (SQLException e) {
+			System.out.println("Got an SQL Exception\n ");
+			e.printStackTrace();
+		}
+
+		Assert.assertTrue(!returnedSuites.isEmpty());
 	}
 
-	@Test(dependsOnMethods = { "testDatabaseReadProjects" })
+	@Test(dependsOnMethods = { "testDatabaseReadSuitesByProject" })
 	public void testDatabaseDisconnect() {
 		System.out.println("Entered the test testDatabaseDisconnect...");
 		dbc.disconnect();

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.david.simple_testing.models.InisTest;
 import com.david.simple_testing.models.Project;
+import com.david.simple_testing.models.Suite;
 
 public class DatabaseConnection2 {
 
@@ -101,10 +102,9 @@ public class DatabaseConnection2 {
 		rs.close();
 	}
 	
-	public ArrayList<Project> readAllProjects(int projectId) throws SQLException {
+	public Project readProjectById(int projectId) throws SQLException {
 		String sql = String.format("SELECT * FROM Projects WHERE id=%d", projectId);
-		ArrayList<Project> results = new ArrayList<>();
-		Project p;
+		Project p = null;
 		
 		System.out.println("Creating readAllProjects statement...");
 		System.out.println(sql);
@@ -117,7 +117,30 @@ public class DatabaseConnection2 {
 			String projectName = rs.getString("name");
 			String projectCreatedOn= rs.getString("created_on");
 			p = new Project(id, projectName, projectCreatedOn);
-			results.add(p);
+		}
+		rs.close();
+		
+		return p;
+	}
+	
+	public ArrayList<Suite> readAllSuitesByProject(Project project) throws SQLException {
+		String sql = String.format("SELECT * FROM Suites WHERE project=%d", project.getId());
+		ArrayList<Suite> results = new ArrayList<>();
+		Suite s;
+		
+		System.out.println("Creating readAllSuitesByProject statement...");
+		System.out.println(sql);
+		
+		stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		while (rs.next()) {
+			// Retrieve by column name
+			int id = rs.getInt("id");
+			int project_id = rs.getInt("project");
+			String suiteName = rs.getString("name");
+			String suiteDescription= rs.getString("description");
+			s = new Suite(id, project, suiteName, suiteDescription);
+			results.add(s);
 		}
 		rs.close();
 		

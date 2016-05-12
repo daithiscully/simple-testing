@@ -8,19 +8,17 @@ public class Suite {
 	private Project project;
 	private String name;
 	private String description;
-	private ArrayList<InisTest> tests;
 
 	public Suite() {
 		super();
 	}
 
-	public Suite(int id, Project project, String name, String description, ArrayList<InisTest> tests) {
+	public Suite(int id, Project project, String name, String description) {
 		super();
 		this.id = id;
 		this.project = project;
 		this.name = name;
 		this.description = description;
-		this.tests = tests;
 	}
 
 	public int getId() {
@@ -55,14 +53,6 @@ public class Suite {
 		this.description = description;
 	}
 
-	public ArrayList<InisTest> getTests() {
-		return tests;
-	}
-
-	public void setTests(ArrayList<InisTest> tests) {
-		this.tests = tests;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -71,7 +61,6 @@ public class Suite {
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((project == null) ? 0 : project.hashCode());
-		result = prime * result + ((tests == null) ? 0 : tests.hashCode());
 		return result;
 	}
 
@@ -101,18 +90,13 @@ public class Suite {
 				return false;
 		} else if (!project.equals(other.project))
 			return false;
-		if (tests == null) {
-			if (other.tests != null)
-				return false;
-		} else if (!tests.equals(other.tests))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Suite [id=" + id + ", project name=" + project.getName() + ", name=" + name + ", description="
-				+ description + ", tests=" + tests.toString() + "]";
+				+ description + "]";
 	}
 
 }
