@@ -8,6 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.david.simple_testing.models.InisTest;
 import com.david.simple_testing.models.Project;
 import com.david.simple_testing.models.Suite;
 import com.david.simple_testing.utilities.DatabaseConnection2;
@@ -21,6 +22,7 @@ public class ReadAllDataFromDatabaseTest {
 
 	DatabaseConnection2 dbc;
 	Project returnedProject = null;
+	ArrayList<Suite> returnedSuites;
 
 	@BeforeClass
 	public void testSetup() {
@@ -49,35 +51,38 @@ public class ReadAllDataFromDatabaseTest {
 	}
 
 	@Test(dependsOnMethods = { "testDatabaseKeepConnectionOpen" })
-	public void testDatabaseReadProjectById() {
+	public void testDatabaseReadProjectById() throws SQLException {
 		System.out.println("Entered the test testDatabaseReadProjectById...");
 		int projectId = 1;
-		
-		try {
-			returnedProject = dbc.readProjectById(projectId);
-			System.out.println("Returned Project: " + returnedProject);
-		} catch (SQLException e) {
-			System.out.println("Got an SQL Exception\n ");
-			e.printStackTrace();
-		}
+
+		returnedProject = dbc.readProjectById(projectId);
+		System.out.println("Returned Project: " + returnedProject);
 
 		Assert.assertTrue(returnedProject != null);
 	}
-	
+
 	@Test(dependsOnMethods = { "testDatabaseReadProjectById" })
-	public void testDatabaseReadSuitesByProject() {
+	public void testDatabaseReadSuitesByProject() throws SQLException {
 		System.out.println("Entered the test testDatabaseReadProjectById...");
-		ArrayList<Suite> returnedSuites = new ArrayList<>();
-		
-		try {
-			returnedSuites = dbc.readAllSuitesByProject(returnedProject);
-			System.out.println("Returned Suites: " + returnedSuites);
-		} catch (SQLException e) {
-			System.out.println("Got an SQL Exception\n ");
-			e.printStackTrace();
-		}
+		returnedSuites = new ArrayList<>();
+
+		returnedSuites = dbc.readAllSuitesByProject(returnedProject);
+		System.out.println("Returned Suites: " + returnedSuites);
 
 		Assert.assertTrue(!returnedSuites.isEmpty());
+	}
+
+	@Test(dependsOnMethods = { "testDatabaseReadSuitesByProject" })
+	public void testDatabaseReadTestsBySuite() throws SQLException {
+		System.out.println("Entered the test testDatabaseReadTestsBySuite...");
+		ArrayList<InisTest> returnedTests = new ArrayList<>();
+
+		for (Suite s : returnedSuites) {
+			returnedTests = dbc.readAllTestsBySuite(s);
+			System.out.println("Suite " + s.getName() + " has these tests:\n" + returnedTests);
+		}
+
+		Assert.assertTrue(!returnedTests.isEmpty());
 	}
 
 	@Test(dependsOnMethods = { "testDatabaseReadSuitesByProject" })

@@ -1,26 +1,22 @@
 package com.david.simple_testing.models;
 
-import java.util.ArrayList;
-
 public class InisTest {
 
 	private int id;
 	private Suite suite;
 	private String name;
 	private String description;
-	private ArrayList<Step> steps;
 
 	public InisTest() {
 
 	}
 
-	public InisTest(int id, Suite suite, String name, String description, ArrayList<Step> steps) {
+	public InisTest(int id, Suite suite, String name, String description) {
 		super();
 		this.setId(id);
 		this.setSuite(suite);
 		this.setName(name);
 		this.setDescription(description);
-		this.setSteps(steps);
 	}
 
 	public int getId() {
@@ -55,14 +51,6 @@ public class InisTest {
 		this.description = description;
 	}
 
-	public ArrayList<Step> getSteps() {
-		return steps;
-	}
-
-	public void setSteps(ArrayList<Step> steps) {
-		this.steps = steps;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,7 +58,6 @@ public class InisTest {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((steps == null) ? 0 : steps.hashCode());
 		result = prime * result + ((suite == null) ? 0 : suite.hashCode());
 		return result;
 	}
@@ -96,11 +83,6 @@ public class InisTest {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (steps == null) {
-			if (other.steps != null)
-				return false;
-		} else if (!steps.equals(other.steps))
-			return false;
 		if (suite == null) {
 			if (other.suite != null)
 				return false;
@@ -111,8 +93,7 @@ public class InisTest {
 
 	@Override
 	public String toString() {
-		return "InisTest [id=" + id + ", suite=" + suite + ", name=" + name + ", description=" + description
-				+ ", steps=" + steps + "]";
+		return "InisTest [id=" + id + ", suite=" + suite + ", name=" + name + ", description=" + description + "]";
 	}
 
 }

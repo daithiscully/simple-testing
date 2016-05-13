@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" parallel="methods">
-	<test name="CreateTestWithSteps">
-		<classes>
-			<class name="com.david.simple_testing.modelTests.CreateTestWithSteps" />
-		</classes>
-	</test> <!-- Test -->
-	<!-- <test name="DatabaseConnectionTest">
-		<classes>
-			<class name="com.david.simple_testing.utilitiesTests.DatabaseConnectionTest" />
-		</classes>
-	</test> -->
 	<test name="ReadAllDataFromDatabaseTest">
 		<classes>
 			<class name="com.david.simple_testing.utilitiesTests.ReadAllDataFromDatabaseTest" />

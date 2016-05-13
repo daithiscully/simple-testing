@@ -1,4 +1,4 @@
-package com.david.simple_testing.modelTests;
+/*package com.david.simple_testing.modelTests;
 
 import java.util.ArrayList;
 
@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import com.david.simple_testing.models.InisTest;
 import com.david.simple_testing.models.Step;
+import com.david.simple_testing.models.Suite;
 
 public class CreateTestWithSteps {
 
@@ -31,7 +32,7 @@ public class CreateTestWithSteps {
 
 	@Test
 	public void createTest() {
-		t1 = new InisTest(testId, null, testName, testDescription, testStepsData);
+		t1 = new InisTest(testId, new Suite(), testName, testDescription);
 	}
 
 	@Test(dependsOnMethods = "createTest")
@@ -69,3 +70,4 @@ public class CreateTestWithSteps {
 	}
 
 }
+*/

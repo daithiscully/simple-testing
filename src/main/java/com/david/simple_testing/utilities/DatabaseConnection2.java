@@ -72,98 +72,80 @@ public class DatabaseConnection2 {
 			if (stmt != null)
 				stmt.close();
 		} catch (SQLException se2) {
-		} // nothing we can do
+		}
 		try {
 			if (conn != null)
 				conn.close();
 		} catch (SQLException se) {
 			se.printStackTrace();
-		} // end finally try
-			// end try
+		}
 		System.out.println("Disconnected!");
 	}// end disconnect
 
-	public void read(String sql) throws SQLException {
-		System.out.println("Creating statement...");
-		stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery(sql);
-		// STEP 5: Extract data from result set
-		while (rs.next()) {
-			// Retrieve by column name
-			int id = rs.getInt("id");
-			String testName = rs.getString("test_name");
-			String testDescription = rs.getString("test_description");
-
-			// Display values
-			System.out.println("ID: " + id);
-			System.out.println(", test_name: " + testName);
-			System.out.println(", test_description: " + testDescription);
-		}
-		rs.close();
-	}
-	
 	public Project readProjectById(int projectId) throws SQLException {
 		String sql = String.format("SELECT * FROM Projects WHERE id=%d", projectId);
 		Project p = null;
-		
+
 		System.out.println("Creating readAllProjects statement...");
 		System.out.println(sql);
-		
+
 		stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()) {
 			// Retrieve by column name
 			int id = rs.getInt("id");
 			String projectName = rs.getString("name");
-			String projectCreatedOn= rs.getString("created_on");
+			String projectCreatedOn = rs.getString("created_on");
 			p = new Project(id, projectName, projectCreatedOn);
 		}
 		rs.close();
-		
+
 		return p;
 	}
-	
+
 	public ArrayList<Suite> readAllSuitesByProject(Project project) throws SQLException {
 		String sql = String.format("SELECT * FROM Suites WHERE project=%d", project.getId());
 		ArrayList<Suite> results = new ArrayList<>();
 		Suite s;
-		
+
 		System.out.println("Creating readAllSuitesByProject statement...");
 		System.out.println(sql);
-		
+
 		stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()) {
-			// Retrieve by column name
 			int id = rs.getInt("id");
-			int project_id = rs.getInt("project");
+			// int project_id = rs.getInt("project");
 			String suiteName = rs.getString("name");
-			String suiteDescription= rs.getString("description");
+			String suiteDescription = rs.getString("description");
 			s = new Suite(id, project, suiteName, suiteDescription);
 			results.add(s);
 		}
 		rs.close();
-		
+
 		return results;
 	}
-	
-	public ArrayList<InisTest> readAllInisTests(String sql) throws SQLException {
+
+	public ArrayList<InisTest> readAllTestsBySuite(Suite suite) throws SQLException {
+		String sql = String.format("SELECT * FROM InisTests WHERE suite=%d", suite.getId());
 		ArrayList<InisTest> results = new ArrayList<>();
-		InisTest t1;
-		
-		System.out.println("Creating readAllInisTests statement...");
+		InisTest t;
+
+		System.out.println("Creating readAllSuitesByProject statement...");
+		System.out.println(sql);
+
 		stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()) {
-			// Retrieve by column name
 			int id = rs.getInt("id");
-			String testName = rs.getString("test_name");
-			String testDescription = rs.getString("test_description");
-			//t1 = new InisTest(id, testName, testDescription);
-			//results.add(t1);
+			// int project_id = rs.getInt("project");
+			String suiteName = rs.getString("name");
+			String suiteDescription = rs.getString("description");
+			t = new InisTest(id, suite, suiteName, suiteDescription);
+			results.add(t);
 		}
 		rs.close();
-		
+
 		return results;
 	}
 }// end DatabaseConnection
