@@ -22,7 +22,7 @@ public class Suite {
 		this.setDescription(description);
 		inisTests = new ArrayList<>();
 	}
-	
+
 	public Suite(int id, Project project, String name, String description, ArrayList<InisTest> inisTests) {
 		super();
 		this.setId(id);
@@ -63,7 +63,7 @@ public class Suite {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public ArrayList<InisTest> getInisTests() {
 		return inisTests;
 	}
@@ -71,7 +71,7 @@ public class Suite {
 	public void setInisTests(ArrayList<InisTest> inisTests) {
 		this.inisTests = inisTests;
 	}
-	
+
 	public void addInisTest(InisTest inisTest) {
 		this.inisTests.add(inisTest);
 	}
@@ -119,8 +119,7 @@ public class Suite {
 	@Override
 	public String toString() {
 		return "\tSuite [id=" + id + ", project name=" + project.getName() + ", name=" + name + ", description="
-				+ description + ", number_of_InisTests="
-						+ inisTests.size() +"]\n\n";
+				+ description + ", number_of_InisTests=" + inisTests.size() + "\n" + inisTests.toString() + "]\n\n";
 	}
 
 }

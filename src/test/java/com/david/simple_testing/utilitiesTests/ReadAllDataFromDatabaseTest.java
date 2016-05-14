@@ -25,7 +25,7 @@ public class ReadAllDataFromDatabaseTest {
 	Project returnedProject = null;
 	ArrayList<Suite> returnedSuites;
 	ArrayList<InisTest> returnedTests;
-	
+
 	@BeforeClass
 	public void testSetup() {
 		System.out.println("\n\nEntered the test setup...");
@@ -36,6 +36,7 @@ public class ReadAllDataFromDatabaseTest {
 	@AfterClass
 	public void testCleanup() {
 		System.out.println("\n\nEntered the test clean up...");
+		dbc.disconnect();
 	}
 
 	@Test
@@ -72,7 +73,7 @@ public class ReadAllDataFromDatabaseTest {
 		System.out.println("Returned Suites: " + returnedSuites);
 
 		Assert.assertTrue(!returnedSuites.isEmpty());
-		for (Suite s : returnedSuites){
+		for (Suite s : returnedSuites) {
 			returnedProject.addSuite(s);
 		}
 	}
@@ -85,14 +86,14 @@ public class ReadAllDataFromDatabaseTest {
 		for (Suite s : returnedSuites) {
 			returnedTests = dbc.readAllTestsBySuite(s);
 			System.out.println("There are " + returnedTests.size() + " tests in suite " + s.getName());
-			
+
 			// Test that there is one test in each Suite
 			Assert.assertTrue(returnedTests.size() == 1);
 			s.setInisTests(returnedTests);
-			
+
 		}
 	}
-	
+
 	@Test(dependsOnMethods = { "testDatabaseReadTestsBySuite" })
 	public void testDatabaseReadStepsByTest() throws SQLException {
 		System.out.println("\n\nEntered the test testDatabaseReadTestsBySuite...");
@@ -104,18 +105,17 @@ public class ReadAllDataFromDatabaseTest {
 
 			// Test that there is 4 steps in each InisTest
 			Assert.assertTrue(returnedSteps.size() == 4);
-			
-			for(Step s : returnedSteps){
+
+			for (Step s : returnedSteps) {
 				System.out.println(s.toString());
 			}
 		}
 	}
 
 	@Test(dependsOnMethods = { "testDatabaseReadStepsByTest" })
-	public void testDatabaseDisconnect() {
-		System.out.println("\n\nEntered the test testDatabaseDisconnect...");
-		dbc.disconnect();
+	public void testDatabaseReadAllProjectData() throws SQLException {
+		System.out.println("\n\nEntered the test testDatabaseReadAllProjectData...");
 		System.out.println("The whole lot of info for project:\n");
-		System.out.println(returnedProject);
+		System.out.println(dbc.getAllProjectData(1).toString());
 	}
 }

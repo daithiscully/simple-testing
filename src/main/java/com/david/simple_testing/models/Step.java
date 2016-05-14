@@ -109,8 +109,8 @@ public class Step extends InisTest {
 
 	@Override
 	public String toString() {
-		return "Step [id=" + id + ", test=" + test.getName() + ", action=" + action + ", actionData1=" + actionData1
-				+ ", actionData2=" + actionData2 + "]\n\n";
+		return "\t\t\tStep [id=" + id + ", test=" + test.getName() + ", action=" + action + ", actionData1="
+				+ actionData1 + ", actionData2=" + actionData2 + "]\n\n";
 	}
 
 }

@@ -72,7 +72,7 @@ public class InisTest {
 		this.steps = steps;
 	}
 
-	public void addSuite(Step step) {
+	public void addStep(Step step) {
 		this.steps.add(step);
 	}
 
@@ -118,8 +118,8 @@ public class InisTest {
 
 	@Override
 	public String toString() {
-		return "InisTest [id=" + id + ", suite=" + suite.getName() + ", name=" + name + ", description=" + description
-				+ ", number_of_steps=" + steps.size() + "]\n\n";
+		return "\t\tInisTest [id=" + id + ", suite=" + suite.getName() + ", name=" + name + ", description="
+				+ description + ", number_of_steps=" + steps.size() + "\n" + steps.toString() + "]\n\n";
 	}
 
 }

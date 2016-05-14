@@ -60,7 +60,7 @@ public class Project {
 	public void setSuites(ArrayList<Suite> suites) {
 		this.suites = suites;
 	}
-	
+
 	public void addSuite(Suite suite) {
 		this.suites.add(suite);
 	}

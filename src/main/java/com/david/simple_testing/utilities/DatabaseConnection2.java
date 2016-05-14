@@ -1,6 +1,10 @@
 package com.david.simple_testing.utilities;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.david.simple_testing.models.InisTest;
@@ -172,5 +176,33 @@ public class DatabaseConnection2 {
 		rs.close();
 
 		return results;
+	}
+
+	public Project getAllProjectData(int projectId) throws SQLException {
+		Project p = readProjectById(projectId);
+
+		// Get all suites belonging to that project
+		ArrayList<Suite> projectSuites = readAllSuitesByProject(p);
+		for (Suite s : projectSuites) {
+			// Get all InisTests belonging to that Suite
+			ArrayList<InisTest> suitesTests = readAllTestsBySuite(s);
+
+			for (InisTest t : suitesTests) {
+
+				// Get all Steps belonging to that InisTest
+				ArrayList<Step> testsSteps = readAllStepsByTest(t);
+
+				for (Step step : testsSteps) {
+					// Add each Step to the InisTest
+					t.addStep(step);
+				}
+				// Add each InisTest to the Suite
+				s.addInisTest(t);
+			}
+			// Add each Suite to the project ADD LAST after every else has been
+			// ordered. Backwards
+			p.addSuite(s);
+		}
+		return p;
 	}
 }// end DatabaseConnection
