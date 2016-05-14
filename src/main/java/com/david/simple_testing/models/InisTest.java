@@ -1,11 +1,14 @@
 package com.david.simple_testing.models;
 
+import java.util.ArrayList;
+
 public class InisTest {
 
 	private int id;
 	private Suite suite;
 	private String name;
 	private String description;
+	private ArrayList<Step> steps;
 
 	public InisTest() {
 
@@ -17,6 +20,16 @@ public class InisTest {
 		this.setSuite(suite);
 		this.setName(name);
 		this.setDescription(description);
+		this.steps = new ArrayList<>();
+	}
+
+	public InisTest(int id, Suite suite, String name, String description, ArrayList<Step> steps) {
+		super();
+		this.setId(id);
+		this.setSuite(suite);
+		this.setName(name);
+		this.setDescription(description);
+		this.setSteps(steps);
 	}
 
 	public int getId() {
@@ -49,6 +62,18 @@ public class InisTest {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public ArrayList<Step> getsteps() {
+		return steps;
+	}
+
+	public void setSteps(ArrayList<Step> steps) {
+		this.steps = steps;
+	}
+
+	public void addSuite(Step step) {
+		this.steps.add(step);
 	}
 
 	@Override
@@ -93,7 +118,8 @@ public class InisTest {
 
 	@Override
 	public String toString() {
-		return "InisTest [id=" + id + ", suite=" + suite + ", name=" + name + ", description=" + description + "]";
+		return "InisTest [id=" + id + ", suite=" + suite.getName() + ", name=" + name + ", description=" + description
+				+ ", number_of_steps=" + steps.size() + "]\n\n";
 	}
 
 }

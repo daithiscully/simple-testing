@@ -8,6 +8,7 @@ public class Suite {
 	private Project project;
 	private String name;
 	private String description;
+	private ArrayList<InisTest> inisTests;
 
 	public Suite() {
 		super();
@@ -15,10 +16,20 @@ public class Suite {
 
 	public Suite(int id, Project project, String name, String description) {
 		super();
-		this.id = id;
-		this.project = project;
-		this.name = name;
-		this.description = description;
+		this.setId(id);
+		this.setProject(project);
+		this.setName(name);
+		this.setDescription(description);
+		inisTests = new ArrayList<>();
+	}
+	
+	public Suite(int id, Project project, String name, String description, ArrayList<InisTest> inisTests) {
+		super();
+		this.setId(id);
+		this.setProject(project);
+		this.setName(name);
+		this.setDescription(description);
+		this.setInisTests(inisTests);
 	}
 
 	public int getId() {
@@ -51,6 +62,18 @@ public class Suite {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public ArrayList<InisTest> getInisTests() {
+		return inisTests;
+	}
+
+	public void setInisTests(ArrayList<InisTest> inisTests) {
+		this.inisTests = inisTests;
+	}
+	
+	public void addInisTest(InisTest inisTest) {
+		this.inisTests.add(inisTest);
 	}
 
 	@Override
@@ -95,8 +118,9 @@ public class Suite {
 
 	@Override
 	public String toString() {
-		return "Suite [id=" + id + ", project name=" + project.getName() + ", name=" + name + ", description="
-				+ description + "]";
+		return "\tSuite [id=" + id + ", project name=" + project.getName() + ", name=" + name + ", description="
+				+ description + ", number_of_InisTests="
+						+ inisTests.size() +"]\n\n";
 	}
 
 }

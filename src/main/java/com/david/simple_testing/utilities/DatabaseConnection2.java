@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.david.simple_testing.models.InisTest;
 import com.david.simple_testing.models.Project;
+import com.david.simple_testing.models.Step;
 import com.david.simple_testing.models.Suite;
 
 public class DatabaseConnection2 {
@@ -131,7 +132,7 @@ public class DatabaseConnection2 {
 		ArrayList<InisTest> results = new ArrayList<>();
 		InisTest t;
 
-		System.out.println("Creating readAllSuitesByProject statement...");
+		System.out.println("Creating readAllTestsBySuite statement...");
 		System.out.println(sql);
 
 		stmt = conn.createStatement();
@@ -143,6 +144,30 @@ public class DatabaseConnection2 {
 			String suiteDescription = rs.getString("description");
 			t = new InisTest(id, suite, suiteName, suiteDescription);
 			results.add(t);
+		}
+		rs.close();
+
+		return results;
+	}
+
+	public ArrayList<Step> readAllStepsByTest(InisTest test) throws SQLException {
+		String sql = String.format("SELECT * FROM Steps WHERE test=%d", test.getId());
+		ArrayList<Step> results = new ArrayList<>();
+		Step s;
+
+		System.out.println("Creating readAllStepsByTest statement...");
+		System.out.println(sql);
+
+		stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		while (rs.next()) {
+			int id = rs.getInt("id");
+			// int test_id = rs.getInt("test");
+			String stepAction = rs.getString("action");
+			String stepActionData1 = rs.getString("action_data_1");
+			String stepActionData2 = rs.getString("action_data_2");
+			s = new Step(id, test, stepAction, stepActionData1, stepActionData2);
+			results.add(s);
 		}
 		rs.close();
 

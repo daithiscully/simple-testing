@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import com.david.simple_testing.models.InisTest;
 import com.david.simple_testing.models.Project;
+import com.david.simple_testing.models.Step;
 import com.david.simple_testing.models.Suite;
 import com.david.simple_testing.utilities.DatabaseConnection2;
 
@@ -23,36 +24,37 @@ public class ReadAllDataFromDatabaseTest {
 	DatabaseConnection2 dbc;
 	Project returnedProject = null;
 	ArrayList<Suite> returnedSuites;
-
+	ArrayList<InisTest> returnedTests;
+	
 	@BeforeClass
 	public void testSetup() {
-		System.out.println("Entered the test setup...");
+		System.out.println("\n\nEntered the test setup...");
 
 		dbc = new DatabaseConnection2();
 	}
 
 	@AfterClass
 	public void testCleanup() {
-		System.out.println("Entered the test clean up...");
+		System.out.println("\n\nEntered the test clean up...");
 	}
 
 	@Test
 	public void testDatabaseConnection() {
-		System.out.println("Entered the test testDatabaseConnection...");
+		System.out.println("\n\nEntered the test testDatabaseConnection...");
 
 		dbc.connectAndDisconnect(IP, DATABASE, USERNAME, PASSWORD);
 	}
 
 	@Test(dependsOnMethods = { "testDatabaseConnection" })
 	public void testDatabaseKeepConnectionOpen() {
-		System.out.println("Entered the test testDatabaseKeepConnectionOpen...");
+		System.out.println("\n\nEntered the test testDatabaseKeepConnectionOpen...");
 
 		dbc.connect(IP, DATABASE, USERNAME, PASSWORD);
 	}
 
 	@Test(dependsOnMethods = { "testDatabaseKeepConnectionOpen" })
 	public void testDatabaseReadProjectById() throws SQLException {
-		System.out.println("Entered the test testDatabaseReadProjectById...");
+		System.out.println("\n\nEntered the test testDatabaseReadProjectById...");
 		int projectId = 1;
 
 		returnedProject = dbc.readProjectById(projectId);
@@ -63,31 +65,57 @@ public class ReadAllDataFromDatabaseTest {
 
 	@Test(dependsOnMethods = { "testDatabaseReadProjectById" })
 	public void testDatabaseReadSuitesByProject() throws SQLException {
-		System.out.println("Entered the test testDatabaseReadProjectById...");
+		System.out.println("\n\nEntered the test testDatabaseReadProjectById...");
 		returnedSuites = new ArrayList<>();
 
 		returnedSuites = dbc.readAllSuitesByProject(returnedProject);
 		System.out.println("Returned Suites: " + returnedSuites);
 
 		Assert.assertTrue(!returnedSuites.isEmpty());
+		for (Suite s : returnedSuites){
+			returnedProject.addSuite(s);
+		}
 	}
 
 	@Test(dependsOnMethods = { "testDatabaseReadSuitesByProject" })
 	public void testDatabaseReadTestsBySuite() throws SQLException {
-		System.out.println("Entered the test testDatabaseReadTestsBySuite...");
-		ArrayList<InisTest> returnedTests = new ArrayList<>();
+		System.out.println("\n\nEntered the test testDatabaseReadTestsBySuite...");
+		returnedTests = new ArrayList<>();
 
 		for (Suite s : returnedSuites) {
 			returnedTests = dbc.readAllTestsBySuite(s);
-			System.out.println("Suite " + s.getName() + " has these tests:\n" + returnedTests);
+			System.out.println("There are " + returnedTests.size() + " tests in suite " + s.getName());
+			
+			// Test that there is one test in each Suite
+			Assert.assertTrue(returnedTests.size() == 1);
+			s.setInisTests(returnedTests);
+			
 		}
+	}
+	
+	@Test(dependsOnMethods = { "testDatabaseReadTestsBySuite" })
+	public void testDatabaseReadStepsByTest() throws SQLException {
+		System.out.println("\n\nEntered the test testDatabaseReadTestsBySuite...");
+		ArrayList<Step> returnedSteps = new ArrayList<>();
 
-		Assert.assertTrue(!returnedTests.isEmpty());
+		for (InisTest t : returnedTests) {
+			returnedSteps = dbc.readAllStepsByTest(t);
+			System.out.println("There are " + returnedSteps.size() + " steps in test" + t.getName());
+
+			// Test that there is 4 steps in each InisTest
+			Assert.assertTrue(returnedSteps.size() == 4);
+			
+			for(Step s : returnedSteps){
+				System.out.println(s.toString());
+			}
+		}
 	}
 
-	@Test(dependsOnMethods = { "testDatabaseReadSuitesByProject" })
+	@Test(dependsOnMethods = { "testDatabaseReadStepsByTest" })
 	public void testDatabaseDisconnect() {
-		System.out.println("Entered the test testDatabaseDisconnect...");
+		System.out.println("\n\nEntered the test testDatabaseDisconnect...");
 		dbc.disconnect();
+		System.out.println("The whole lot of info for project:\n");
+		System.out.println(returnedProject);
 	}
 }

@@ -1,10 +1,13 @@
 package com.david.simple_testing.models;
 
+import java.util.ArrayList;
+
 public class Project {
 
 	private int id;
 	private String name;
 	private String createdOn;
+	private ArrayList<Suite> suites;
 
 	public Project() {
 		super();
@@ -15,6 +18,15 @@ public class Project {
 		this.setId(id);
 		this.setName(name);
 		this.setCreatedOn(createdOn);
+		suites = new ArrayList<>();
+	}
+
+	public Project(int id, String name, String createdOn, ArrayList<Suite> suites) {
+		super();
+		this.setId(id);
+		this.setName(name);
+		this.setCreatedOn(createdOn);
+		this.setSuites(suites);
 	}
 
 	public int getId() {
@@ -41,9 +53,22 @@ public class Project {
 		this.createdOn = createdOn;
 	}
 
+	public ArrayList<Suite> getSuites() {
+		return suites;
+	}
+
+	public void setSuites(ArrayList<Suite> suites) {
+		this.suites = suites;
+	}
+	
+	public void addSuite(Suite suite) {
+		this.suites.add(suite);
+	}
+
 	@Override
 	public String toString() {
-		return "Project [id=" + id + ", name=" + name + ", createdOn=" + createdOn + "]";
+		return "Project [id=" + id + ", name=" + name + ", createdOn=" + createdOn + ", number_of_suites="
+				+ suites.size() + "\n" + suites.toString() + "]\n\n";
 	}
 
 	@Override
