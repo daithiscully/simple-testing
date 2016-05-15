@@ -56,8 +56,8 @@ CREATE TABLE `InisTests` (
   PRIMARY KEY (`id`),
   KEY `InisTests_fk0` (`suite`),
   KEY `InisTests_fk1` (`browser`),
-  CONSTRAINT `InisTests_fk1` FOREIGN KEY (`browser`) REFERENCES `Browsers` (`id`),
-  CONSTRAINT `InisTests_fk0` FOREIGN KEY (`suite`) REFERENCES `Suites` (`id`)
+  CONSTRAINT `InisTests_fk0` FOREIGN KEY (`suite`) REFERENCES `Suites` (`id`),
+  CONSTRAINT `InisTests_fk1` FOREIGN KEY (`browser`) REFERENCES `Browsers` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -67,7 +67,7 @@ CREATE TABLE `InisTests` (
 
 LOCK TABLES `InisTests` WRITE;
 /*!40000 ALTER TABLE `InisTests` DISABLE KEYS */;
-INSERT INTO `InisTests` VALUES (1,1,'Test 1',1,'This is a description of a Test ....');
+INSERT INTO `InisTests` VALUES (1,1,'Test 1',1,'This is a description of a Test ....'),(2,2,'End to end user experience test',2,'Validate user can go somewhere');
 /*!40000 ALTER TABLE `InisTests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,11 +79,11 @@ DROP TABLE IF EXISTS `Projects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Projects` (
-  `id` bigint(100) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `created_on` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +121,7 @@ CREATE TABLE `Steps` (
 
 LOCK TABLES `Steps` WRITE;
 /*!40000 ALTER TABLE `Steps` DISABLE KEYS */;
-INSERT INTO `Steps` VALUES (1,1,'Go to URL','http:expertsoftwaretest.ie',''),(2,1,'Validate Title','Software Test Experts',''),(3,1,'Click Link','/html/body/footer/div[1]/div/div/div/div/ul/li[1]/a',''),(4,1,'Validate Title','Inis Software Consulting - ISC Ltd.','');
+INSERT INTO `Steps` VALUES (1,1,'Go to URL','http:expertsoftwaretest.ie','test'),(2,1,'Validate Title','Software Test Experts',''),(3,1,'Click Link','/html/body/footer/div[1]/div/div/div/div/ul/li[1]/a','test'),(4,1,'Validate Title','Inis Software Consulting - ISC Ltd.',''),(5,2,'Go to URL','http:expertsoftwaretest.ie','test'),(6,2,'Click link','/html/body/footer/div[1]/div/div/div/div/ul/li[1]/a',''),(7,2,'Validate Title','Software Test Experts',''),(8,2,'Validate Title','Inis Software Consulting - ISC Ltd.','');
 /*!40000 ALTER TABLE `Steps` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +149,7 @@ CREATE TABLE `Suites` (
 
 LOCK TABLES `Suites` WRITE;
 /*!40000 ALTER TABLE `Suites` DISABLE KEYS */;
-INSERT INTO `Suites` VALUES (1,1,'Suite 1','Initial Suite at DB creation');
+INSERT INTO `Suites` VALUES (1,1,'Suite 1','Initial Suite at DB creation'),(2,1,'Suite 2','SEcond Suite for functional tests');
 /*!40000 ALTER TABLE `Suites` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -162,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-11 20:48:44
+-- Dump completed on 2016-05-15 15:48:43
