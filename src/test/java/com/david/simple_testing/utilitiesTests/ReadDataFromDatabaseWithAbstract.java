@@ -12,27 +12,25 @@ import com.david.simple_testing.models.InisTest;
 import com.david.simple_testing.models.Project;
 import com.david.simple_testing.models.Step;
 import com.david.simple_testing.models.Suite;
-import com.david.simple_testing.utilities.DatabaseConnection2;
+import com.david.simple_testing.utilities.ReadDatabase;
 
-public class ReadAllDataFromDatabaseTest {
+public class ReadDataFromDatabaseWithAbstract {
 
 	private final String IP = "localhost";
 	private final String DATABASE = "simpletesting";
 	private final String USERNAME = "testuser";
 	private final String PASSWORD = "password";
 
-	DatabaseConnection2 dbc;
+	ReadDatabase dbc;
 	Project returnedProject = null;
 	ArrayList<Suite> returnedSuites;
 	ArrayList<InisTest> returnedTests;
 
 	@BeforeClass
-	public void testSetup() {
-		System.out.println("\n\nEntered the test setup...");
-
-		dbc = new DatabaseConnection2();
+	public void setup() {
+		dbc = new ReadDatabase();
 	}
-
+	
 	@AfterClass
 	public void testCleanup() {
 		System.out.println("\n\nEntered the test clean up...");
@@ -40,20 +38,12 @@ public class ReadAllDataFromDatabaseTest {
 	}
 
 	@Test
-	public void testDatabaseConnection() {
-		System.out.println("\n\nEntered the test testDatabaseConnection...");
-
-		dbc.connectAndDisconnect(IP, DATABASE, USERNAME, PASSWORD);
-	}
-
-	@Test(dependsOnMethods = { "testDatabaseConnection" })
-	public void testDatabaseKeepConnectionOpen() {
-		System.out.println("\n\nEntered the test testDatabaseKeepConnectionOpen...");
-
+	public void testConnectToDatabase() {
 		dbc.connect(IP, DATABASE, USERNAME, PASSWORD);
+
 	}
 
-	@Test(dependsOnMethods = { "testDatabaseKeepConnectionOpen" })
+	@Test(dependsOnMethods = { "testConnectToDatabase" })
 	public void testDatabaseReadProjectById() throws SQLException {
 		System.out.println("\n\nEntered the test testDatabaseReadProjectById...");
 		int projectId = 1;
@@ -118,4 +108,5 @@ public class ReadAllDataFromDatabaseTest {
 		System.out.println("The whole lot of info for project:\n");
 		System.out.println(dbc.getAllProjectData(1).toString());
 	}
+
 }

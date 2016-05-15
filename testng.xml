@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" parallel="methods">
-	<test name="ReadAllDataFromDatabaseTest">
+	<test name="ReadDataFromDatabaseWithAbstract">
 		<classes>
-			<class name="com.david.simple_testing.utilitiesTests.ReadAllDataFromDatabaseTest" />
+			<class name="com.david.simple_testing.utilitiesTests.ReadDataFromDatabaseWithAbstract" />
+		</classes>
+	</test>
+	<test name="InsertDeleteProjectInDatabaseTest">
+		<classes>
+			<class name="com.david.simple_testing.utilitiesTests.InsertDeleteProjectInDatabaseTest" />
 		</classes>
 	</test>
 </suite> <!-- Suite -->

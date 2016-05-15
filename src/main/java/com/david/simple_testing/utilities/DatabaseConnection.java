@@ -1,9 +1,9 @@
 package com.david.simple_testing.utilities;
 
-import java.sql.*;
-import java.util.ArrayList;
-
-import com.david.simple_testing.models.InisTest;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DatabaseConnection {
 
@@ -11,6 +11,7 @@ public class DatabaseConnection {
 	Connection conn = null;
 	Statement stmt = null;
 
+	// Only used for testing connectivity to the databases
 	public void connectAndDisconnect(String ip, String database, String username, String password) {
 		Connection conn = null;
 		Statement stmt = null;
@@ -55,7 +56,7 @@ public class DatabaseConnection {
 			System.out.println("Connecting to database...");
 			conn = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + database, username, password);
 
-			System.out.println("Connected database successfully...");
+			System.out.println("Connected to database:{ jdbc:mysql://" + ip + "/" + database + " } successfully...");
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
@@ -81,7 +82,7 @@ public class DatabaseConnection {
 		System.out.println("Disconnected!");
 	}// end disconnect
 
-	public void read(String sql) throws SQLException {
+	/*public void read(String sql) throws SQLException {
 		System.out.println("Creating statement...");
 		stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
@@ -99,11 +100,11 @@ public class DatabaseConnection {
 		}
 		rs.close();
 	}
-	
+
 	public ArrayList<InisTest> readAllInisTests(String sql) throws SQLException {
 		ArrayList<InisTest> results = new ArrayList<>();
 		InisTest t1;
-		
+
 		System.out.println("Creating statement...");
 		stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
@@ -113,11 +114,11 @@ public class DatabaseConnection {
 			int id = rs.getInt("id");
 			String testName = rs.getString("test_name");
 			String testDescription = rs.getString("test_description");
-			//t1 = new InisTest(id, testName, testDescription);
-			//results.add(t1);
+			// t1 = new InisTest(id, testName, testDescription);
+			// results.add(t1);
 		}
 		rs.close();
-		
+
 		return results;
-	}
+	}*/
 }// end DatabaseConnection

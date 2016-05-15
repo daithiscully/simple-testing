@@ -12,6 +12,15 @@ public class Project {
 	public Project() {
 		super();
 	}
+	
+	// This might be good for inserting as the ID is auto incremented in DB
+	public Project(String name, String createdOn) {
+		super();
+		this.setId(0);
+		this.setName(name);
+		this.setCreatedOn(createdOn);
+		suites = new ArrayList<>();
+	}
 
 	public Project(int id, String name, String createdOn) {
 		super();
