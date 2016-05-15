@@ -32,6 +32,7 @@ public class InsertDeleteProjectInDatabaseTest {
 	@BeforeClass
 	public void setup() {
 		System.out.println("\n\nEntered the test setup...");
+		
 		dbc = new InsertDatabase();
 		ddbc = new DeleteDatabase();
 
@@ -40,6 +41,7 @@ public class InsertDeleteProjectInDatabaseTest {
 	@AfterClass
 	public void testCleanup() {
 		System.out.println("\n\nEntered the test clean up...");
+		
 		dbc.disconnect();
 		ddbc.disconnect();
 	}
@@ -47,24 +49,28 @@ public class InsertDeleteProjectInDatabaseTest {
 	@Test
 	public void testConnectToDatabase() {
 		System.out.println("\n\nEntered the testConnectToDatabase...");
+		
 		dbc.connect(IP, DATABASE, USERNAME, PASSWORD);
 	}
 
 	@Test(dependsOnMethods = { "testConnectToDatabase" })
 	public void testCreateProjectObject() {
 		System.out.println("\n\nEntered the testCreateProjectObject...");
+		
 		p = new Project("From Insert Test", "15/05/2016");
 	}
 
 	@Test(dependsOnMethods = { "testCreateProjectObject" })
 	public void testProjectInsert() {
 		System.out.println("\n\nEntered the testProjectInsert...");
+		
 		p.setId(dbc.insertProject(p));
 	}
 
 	@Test(dependsOnMethods = { "testProjectInsert" })
 	public void testProjectDelete() {
 		System.out.println("\n\nEntered the testProjectDelete...");
+		
 		ddbc.connect(IP, DATABASE, USERNAME, PASSWORD);
 		ddbc.deleteProject(p);
 	}

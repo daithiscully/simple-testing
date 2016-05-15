@@ -82,43 +82,4 @@ public class DatabaseConnection {
 		System.out.println("Disconnected!");
 	}// end disconnect
 
-	/*public void read(String sql) throws SQLException {
-		System.out.println("Creating statement...");
-		stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery(sql);
-		// STEP 5: Extract data from result set
-		while (rs.next()) {
-			// Retrieve by column name
-			int id = rs.getInt("id");
-			String testName = rs.getString("test_name");
-			String testDescription = rs.getString("test_description");
-
-			// Display values
-			System.out.println("ID: " + id);
-			System.out.println(", test_name: " + testName);
-			System.out.println(", test_description: " + testDescription);
-		}
-		rs.close();
-	}
-
-	public ArrayList<InisTest> readAllInisTests(String sql) throws SQLException {
-		ArrayList<InisTest> results = new ArrayList<>();
-		InisTest t1;
-
-		System.out.println("Creating statement...");
-		stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery(sql);
-		// STEP 5: Extract data from result set
-		while (rs.next()) {
-			// Retrieve by column name
-			int id = rs.getInt("id");
-			String testName = rs.getString("test_name");
-			String testDescription = rs.getString("test_description");
-			// t1 = new InisTest(id, testName, testDescription);
-			// results.add(t1);
-		}
-		rs.close();
-
-		return results;
-	}*/
 }// end DatabaseConnection

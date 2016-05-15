@@ -9,9 +9,8 @@ import com.david.simple_testing.models.Project;
 import com.david.simple_testing.models.Step;
 import com.david.simple_testing.models.Suite;
 
-public class ReadDatabase extends DatabaseConnection{
-	
-	
+public class ReadDatabase extends DatabaseConnection {
+
 	public Project readProjectById(int projectId) throws SQLException {
 		String sql = String.format("SELECT * FROM Projects WHERE id=%d", projectId);
 		Project p = null;

@@ -13,7 +13,7 @@ public class InsertDatabase extends DatabaseConnection {
 	public int insertProject(Project p) {
 
 		int lastInsertId = 0;
-		
+
 		String sql = " insert into Projects (name, created_on)" + " values (?, ?)";
 
 		System.out.println("Creating insertProject statement...");
@@ -27,9 +27,9 @@ public class InsertDatabase extends DatabaseConnection {
 			preparedStmt.setString(2, p.getCreatedOn());
 			// execute the preparedstatement
 			preparedStmt.execute();
-			
-			ResultSet keys = preparedStmt.getGeneratedKeys();    
-			keys.next();  
+
+			ResultSet keys = preparedStmt.getGeneratedKeys();
+			keys.next();
 			lastInsertId = keys.getInt(1);
 
 			return lastInsertId;
@@ -41,13 +41,13 @@ public class InsertDatabase extends DatabaseConnection {
 
 	}
 
-	// Create a Suite in DB
+	// TODO: Create a Suite in DB
 
-	// Create an InisTest in DB
+	// TODO: Create an InisTest in DB
 
-	// Create a Step in DB
+	// TODO: Create a Step in DB
 
-	// Create Project which will populate all child tables in one method ( like
+	// TODO: Create Project which will populate all child tables in one method ( like
 	// with the read )
 
 }

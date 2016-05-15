@@ -12,7 +12,7 @@ public class Project {
 	public Project() {
 		super();
 	}
-	
+
 	// This might be good for inserting as the ID is auto incremented in DB
 	public Project(String name, String createdOn) {
 		super();

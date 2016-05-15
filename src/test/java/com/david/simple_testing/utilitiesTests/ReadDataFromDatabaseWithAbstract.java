@@ -30,7 +30,7 @@ public class ReadDataFromDatabaseWithAbstract {
 	public void setup() {
 		dbc = new ReadDatabase();
 	}
-	
+
 	@AfterClass
 	public void testCleanup() {
 		System.out.println("\n\nEntered the test clean up...");

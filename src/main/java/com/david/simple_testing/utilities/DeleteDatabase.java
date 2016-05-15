@@ -31,13 +31,13 @@ public class DeleteDatabase extends DatabaseConnection {
 
 	}
 
-	// Create a Suite in DB
+	// TODO: DELETE a Suite in DB
 
-	// Create an InisTest in DB
+	// TODO: DELETE an InisTest in DB
 
-	// Create a Step in DB
+	// TODO: DELETE a Step in DB
 
-	// Create Project which will populate all child tables in one method ( like
-	// with the read )
+	// TODO: DELETE Project which will DELETE all foreign key shit in one method (
+	// like the read )
 
 }
