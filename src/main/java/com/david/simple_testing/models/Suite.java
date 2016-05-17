@@ -13,6 +13,16 @@ public class Suite {
 	public Suite() {
 		super();
 	}
+	
+	// This might be good for inserting as the ID is auto incremented in DB
+	public Suite(Project project, String name, String description) {
+		super();
+		this.setId(0);
+		this.setProject(project);
+		this.setName(name);
+		this.setDescription(description);
+		inisTests = new ArrayList<>();
+	}
 
 	public Suite(int id, Project project, String name, String description) {
 		super();

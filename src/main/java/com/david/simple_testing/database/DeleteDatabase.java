@@ -27,6 +27,7 @@ public class DeleteDatabase extends DatabaseConnection {
 			// execute the prepared statement
 			preparedStmt.execute();
 
+			resetProjectAutoIncrement("Projects");
 			return true;
 		} catch (SQLException e) {
 			System.out.println("Got an SQLException in the Delete Project");
@@ -50,6 +51,7 @@ public class DeleteDatabase extends DatabaseConnection {
 			preparedStmt = conn.prepareStatement(sql);
 			preparedStmt.execute();
 
+			resetProjectAutoIncrement("Suites");
 			return true;
 		} catch (SQLException e) {
 			System.out.println("Got an SQLException in the Delete Suite");
@@ -73,6 +75,7 @@ public class DeleteDatabase extends DatabaseConnection {
 			preparedStmt = conn.prepareStatement(sql);
 			preparedStmt.execute();
 
+			resetProjectAutoIncrement("InisTests");
 			return true;
 		} catch (SQLException e) {
 			System.out.println("Got an SQLException in the Delete Inis Test");
@@ -96,6 +99,7 @@ public class DeleteDatabase extends DatabaseConnection {
 			preparedStmt = conn.prepareStatement(sql);
 			preparedStmt.execute();
 
+			resetProjectAutoIncrement("Steps");
 			return true;
 		} catch (SQLException e) {
 			System.out.println("Got an SQLException in the Delete Step");
@@ -108,24 +112,66 @@ public class DeleteDatabase extends DatabaseConnection {
 
 	// TODO: DELETE Project which will DELETE all foreign key shit in one method
 	// ???
-	public void deleteAllProjectData(Project project) throws SQLException {
+	public boolean deleteAllProjectData(Project project) {
 
 		// Delete from lower tables in the hierarchy
 
 		ArrayList<Suite> allSuites = project.getSuites();
+		System.out.println("----Start----");
 		for (Suite suite : allSuites) {
+			System.out.println("In Suite Loop");
 			ArrayList<InisTest> allInisTests = suite.getInisTests();
+			
 			for (InisTest inisTest : allInisTests) {
+				System.out.println("in InisTestLoop");
 				ArrayList<Step> allSteps = inisTest.getSteps();
+				
 				for (Step step : allSteps) {
+					System.out.println("In Steps loop");
 					deleteStep(step);
+					resetProjectAutoIncrement("Steps");
+					
 				}
+				System.out.println("Out of Steps loop");
 				deleteInisTest(inisTest);
+				resetProjectAutoIncrement("InisTests");
 			}
+			System.out.println("Out of InisTest Loop");
 			deleteSuite(suite);
+			resetProjectAutoIncrement("Suites");
+			
 		}
-		deleteProject(project);
-
+		System.out.println("Out of Suite loop");
+		if(deleteProject(project)){
+			resetProjectAutoIncrement("Projects");
+			return true;
+		}
+		else
+			return false;
+		
+		/*ArrayList<Step> allSteps = null;
+		ArrayList<InisTest> allInisTests = null;
+		ArrayList<Suite> allSuites = project.getSuites();
+		
+		for (Suite suite : allSuites) {
+			allInisTests = suite.getInisTests();
+			for (InisTest inisTest : allInisTests) {
+				allSteps = inisTest.getSteps();
+			}
+		}		
+		for (Step step : allSteps) {
+			deleteStep(step);
+			resetProjectAutoIncrement("Steps");
+		}
+		for (InisTest inisTest: allInisTests) {
+			deleteInisTest(inisTest);
+			resetProjectAutoIncrement("InisTests");
+		}
+		for (Suite suite : allSuites) {
+			deleteSuite(suite);
+			resetProjectAutoIncrement("Suites");
+		}
+		deleteProject(project);*/
 	}
 	
 	// TODO: Reset Auto_increment for each table

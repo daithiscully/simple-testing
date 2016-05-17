@@ -14,7 +14,18 @@ public class InisTest {
 	public InisTest() {
 
 	}
-
+	
+	// This might be good for inserting as the ID is auto incremented in DB
+	public InisTest(Suite suite, String name, Browser browser, String description) {
+		super();
+		this.setId(0);
+		this.setSuite(suite);
+		this.setName(name);
+		this.setBrowser(browser);
+		this.setDescription(description);
+		this.steps = new ArrayList<>();
+	}
+	
 	public InisTest(int id, Suite suite, String name, Browser browser, String description) {
 		super();
 		this.setId(id);

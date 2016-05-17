@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS `InisTests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `InisTests` (
-  `id` bigint(100) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `suite` bigint(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   `browser` int(2) NOT NULL DEFAULT '1',
@@ -58,7 +58,7 @@ CREATE TABLE `InisTests` (
   KEY `InisTests_fk1` (`browser`),
   CONSTRAINT `InisTests_fk0` FOREIGN KEY (`suite`) REFERENCES `Suites` (`id`),
   CONSTRAINT `InisTests_fk1` FOREIGN KEY (`browser`) REFERENCES `Browsers` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +104,7 @@ DROP TABLE IF EXISTS `Steps`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Steps` (
-  `id` bigint(100) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `test` bigint(100) NOT NULL,
   `action` varchar(100) NOT NULL,
   `action_data_1` varchar(100) NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE `Steps` (
   PRIMARY KEY (`id`),
   KEY `Steps_fk0` (`test`),
   CONSTRAINT `Steps_fk0` FOREIGN KEY (`test`) REFERENCES `InisTests` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,14 +133,14 @@ DROP TABLE IF EXISTS `Suites`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Suites` (
-  `id` bigint(100) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `project` bigint(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   `description` varchar(240) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `Suites_fk0` (`project`),
   CONSTRAINT `Suites_fk0` FOREIGN KEY (`project`) REFERENCES `Projects` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-15 15:48:43
+-- Dump completed on 2016-05-17 21:40:10

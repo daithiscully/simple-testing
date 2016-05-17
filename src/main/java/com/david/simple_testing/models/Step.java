@@ -11,6 +11,15 @@ public class Step extends InisTest {
 	public Step() {
 		super();
 	}
+	
+	public Step(InisTest test, String action, String actionData1, String actionData2) {
+		super();
+		this.setId(0);
+		this.setTest(test);
+		this.setAction(action);
+		this.setActionData1(actionData1);
+		this.setActionData2(actionData2);
+	}
 
 	public Step(int id, InisTest test, String action, String actionData1, String actionData2) {
 		super();

@@ -6,6 +6,11 @@ public class Browser {
 	private String name;
 	private String version;
 	
+	public Browser(int id) {
+		super();
+		this.id = id;
+	}
+	
 	public Browser(int id, String name, String version) {
 		super();
 		this.id = id;

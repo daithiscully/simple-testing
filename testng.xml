@@ -11,4 +11,9 @@
 			<class name="com.david.simple_testing.databaseTests.InsertDeleteProjectInDatabaseTest" />
 		</classes>
 	</test>
+	<test name="InsertDataToAllTablesTest">
+		<classes>
+			<class name="com.david.simple_testing.databaseTests.InsertDataToAllTablesTest" />
+		</classes>
+	</test>
 </suite> <!-- Suite -->
