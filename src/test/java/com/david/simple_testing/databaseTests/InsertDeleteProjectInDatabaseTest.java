@@ -1,4 +1,4 @@
-package com.david.simple_testing.utilitiesTests;
+package com.david.simple_testing.databaseTests;
 
 import java.util.ArrayList;
 
@@ -6,11 +6,11 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.david.simple_testing.database.DeleteDatabase;
+import com.david.simple_testing.database.InsertDatabase;
 import com.david.simple_testing.models.InisTest;
 import com.david.simple_testing.models.Project;
 import com.david.simple_testing.models.Suite;
-import com.david.simple_testing.utilities.DeleteDatabase;
-import com.david.simple_testing.utilities.InsertDatabase;
 
 /*
  * This test will create a new Project object and store it in the DB. 

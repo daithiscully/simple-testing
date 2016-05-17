@@ -1,4 +1,4 @@
-package com.david.simple_testing.utilitiesTests;
+package com.david.simple_testing.databaseTests;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,11 +8,11 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.david.simple_testing.database.ReadDatabase;
 import com.david.simple_testing.models.InisTest;
 import com.david.simple_testing.models.Project;
 import com.david.simple_testing.models.Step;
 import com.david.simple_testing.models.Suite;
-import com.david.simple_testing.utilities.ReadDatabase;
 
 public class ReadDataFromDatabaseWithAbstract {
 

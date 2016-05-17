@@ -1,9 +1,10 @@
-package com.david.simple_testing.utilities;
+package com.david.simple_testing.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.david.simple_testing.models.Browser;
 import com.david.simple_testing.models.InisTest;
 import com.david.simple_testing.models.Project;
 import com.david.simple_testing.models.Step;
@@ -11,11 +12,32 @@ import com.david.simple_testing.models.Suite;
 
 public class ReadDatabase extends DatabaseConnection {
 
+	public Browser readBrowserById(int browserId) throws SQLException {
+		String sql = String.format("SELECT * FROM Browsers WHERE id=%d", browserId);
+		Browser b = null;
+
+		System.out.println("Creating readBrowserById statement...");
+		System.out.println(sql);
+
+		stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		while (rs.next()) {
+			// Retrieve by column name
+			int id = rs.getInt("id");
+			String browserName = rs.getString("name");
+			String browserVersion = rs.getString("version");
+			b = new Browser(id, browserName, browserVersion);
+		}
+		rs.close();
+
+		return b;
+	}
+	
 	public Project readProjectById(int projectId) throws SQLException {
 		String sql = String.format("SELECT * FROM Projects WHERE id=%d", projectId);
 		Project p = null;
 
-		System.out.println("Creating readAllProjects statement...");
+		System.out.println("Creating readProjectById statement...");
 		System.out.println(sql);
 
 		stmt = conn.createStatement();
@@ -68,9 +90,10 @@ public class ReadDatabase extends DatabaseConnection {
 		while (rs.next()) {
 			int id = rs.getInt("id");
 			// int project_id = rs.getInt("project");
-			String suiteName = rs.getString("name");
-			String suiteDescription = rs.getString("description");
-			t = new InisTest(id, suite, suiteName, suiteDescription);
+			String inisTestName = rs.getString("name");
+			int browserId = rs.getInt("browser");
+			String inisTestDescription = rs.getString("description");
+			t = new InisTest(id, suite, inisTestName, readBrowserById(browserId), inisTestDescription);
 			results.add(t);
 		}
 		rs.close();
@@ -129,4 +152,4 @@ public class ReadDatabase extends DatabaseConnection {
 		}
 		return p;
 	}
-}// end DatabaseConnection
+}// end ReadDatabase

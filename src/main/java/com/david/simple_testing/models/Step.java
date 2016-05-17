@@ -29,7 +29,7 @@ public class Step extends InisTest {
 		this.id = id;
 	}
 
-	public InisTest getTest() {
+	public InisTest getInisTest() {
 		return test;
 	}
 

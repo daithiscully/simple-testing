@@ -6,6 +6,7 @@ public class InisTest {
 
 	private int id;
 	private Suite suite;
+	private Browser browser;
 	private String name;
 	private String description;
 	private ArrayList<Step> steps;
@@ -14,11 +15,12 @@ public class InisTest {
 
 	}
 
-	public InisTest(int id, Suite suite, String name, String description) {
+	public InisTest(int id, Suite suite, String name, Browser browser, String description) {
 		super();
 		this.setId(id);
 		this.setSuite(suite);
 		this.setName(name);
+		this.setBrowser(browser);
 		this.setDescription(description);
 		this.steps = new ArrayList<>();
 	}
@@ -47,6 +49,14 @@ public class InisTest {
 	public void setSuite(Suite suite) {
 		this.suite = suite;
 	}
+	
+	public Browser getBrowser() {
+		return browser;
+	}
+
+	public void setBrowser(Browser browser) {
+		this.browser = browser;
+	}
 
 	public String getName() {
 		return name;
@@ -64,7 +74,7 @@ public class InisTest {
 		this.description = description;
 	}
 
-	public ArrayList<Step> getsteps() {
+	public ArrayList<Step> getSteps() {
 		return steps;
 	}
 

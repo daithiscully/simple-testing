@@ -3,12 +3,12 @@
 <suite name="Suite" parallel="methods">
 	<test name="ReadDataFromDatabaseWithAbstract">
 		<classes>
-			<class name="com.david.simple_testing.utilitiesTests.ReadDataFromDatabaseWithAbstract" />
+			<class name="com.david.simple_testing.databaseTests.ReadDataFromDatabaseWithAbstract" />
 		</classes>
 	</test>
 	<test name="InsertDeleteProjectInDatabaseTest">
 		<classes>
-			<class name="com.david.simple_testing.utilitiesTests.InsertDeleteProjectInDatabaseTest" />
+			<class name="com.david.simple_testing.databaseTests.InsertDeleteProjectInDatabaseTest" />
 		</classes>
 	</test>
 </suite> <!-- Suite -->

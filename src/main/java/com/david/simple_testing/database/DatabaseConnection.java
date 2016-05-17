@@ -1,4 +1,4 @@
-package com.david.simple_testing.utilities;
+package com.david.simple_testing.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
