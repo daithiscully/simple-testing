@@ -16,4 +16,15 @@
 			<class name="com.david.simple_testing.databaseTests.InsertDataToAllTablesTest" />
 		</classes>
 	</test>
+	
+	<test name="TestUpdateProjectDatabase">
+		<classes>
+			<class name="com.david.simple_testing.databaseTests.TestUpdateProjectDatabase" />
+		</classes>
+	</test>
+	<test name="TestUpdateSuiteDatabase">
+		<classes>
+			<class name="com.david.simple_testing.databaseTests.TestUpdateSuiteDatabase" />
+		</classes>
+	</test>
 </suite> <!-- Suite -->

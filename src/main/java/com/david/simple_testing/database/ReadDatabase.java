@@ -48,6 +48,7 @@ public class ReadDatabase extends DatabaseConnection {
 			String projectName = rs.getString("name");
 			String projectCreatedOn = rs.getString("created_on");
 			p = new Project(id, projectName, projectCreatedOn);
+			p.setSuites(readAllSuitesByProject(p));
 		}
 		rs.close();
 
@@ -70,6 +71,7 @@ public class ReadDatabase extends DatabaseConnection {
 			String suiteName = rs.getString("name");
 			String suiteDescription = rs.getString("description");
 			s = new Suite(id, project, suiteName, suiteDescription);
+			s.setInisTests(readAllTestsBySuite(s));
 			results.add(s);
 		}
 		rs.close();
@@ -94,6 +96,7 @@ public class ReadDatabase extends DatabaseConnection {
 			int browserId = rs.getInt("browser");
 			String inisTestDescription = rs.getString("description");
 			t = new InisTest(id, suite, inisTestName, readBrowserById(browserId), inisTestDescription);
+			t.setSteps(readAllStepsByTest(t));
 			results.add(t);
 		}
 		rs.close();
