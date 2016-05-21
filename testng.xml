@@ -32,4 +32,9 @@
 			<class name="com.david.simple_testing.databaseTests.TestUpdateInisTestDatabase" />
 		</classes>
 	</test>
+	<test name="TestUpdateStepDatabase">
+		<classes>
+			<class name="com.david.simple_testing.databaseTests.TestUpdateStepDatabase" />
+		</classes>
+	</test>
 </suite> <!-- Suite -->
