@@ -35,6 +35,7 @@ public class ReadDataFromDatabaseWithAbstract {
 	public void testCleanup() {
 		System.out.println("\n\nEntered the test clean up...");
 		dbc.disconnect();
+		System.out.println("======================Finished test " + this.getClass().getSimpleName() + "======================");
 	}
 
 	@Test

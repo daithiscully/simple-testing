@@ -27,4 +27,9 @@
 			<class name="com.david.simple_testing.databaseTests.TestUpdateSuiteDatabase" />
 		</classes>
 	</test>
+	<test name="TestUpdateInisTestDatabase">
+		<classes>
+			<class name="com.david.simple_testing.databaseTests.TestUpdateInisTestDatabase" />
+		</classes>
+	</test>
 </suite> <!-- Suite -->

@@ -9,10 +9,12 @@ import org.testng.annotations.Test;
 
 import com.david.simple_testing.database.ReadDatabase;
 import com.david.simple_testing.database.UpdateDatabase;
+import com.david.simple_testing.models.Browser;
+import com.david.simple_testing.models.InisTest;
 import com.david.simple_testing.models.Project;
 import com.david.simple_testing.models.Suite;
 
-public class TestUpdateSuiteDatabase {
+public class TestUpdateInisTestDatabase {
 
 	private final String IP = "localhost";
 	private final String DATABASE = "simpletesting";
@@ -20,9 +22,11 @@ public class TestUpdateSuiteDatabase {
 	private final String PASSWORD = "password";
 	
 	private final int PROJECT_ID = 1;
-	private final String SUITE_NEW_NAME = "Human After All";
-	private final String SUITE_NEW_DESCRIPTION = "47/4/1234";
+	private final String INIS_TEST_NEW_NAME = "I am a bleeding test";
+	private final String INIS_TEST_NEW_DESCRIPTION = "Listen up to a story..";
+	private final Browser INIS_TEST_NEW_BROWSER = new Browser(1);
 
+	InisTest inisTest;
 	Suite suite;
 	Project project;
 	ReadDatabase rdb;
@@ -37,29 +41,29 @@ public class TestUpdateSuiteDatabase {
 		
 		try {
 			project = rdb.readProjectById(PROJECT_ID);
-			System.out.println("--++ Suite reurned at arraylist 0: == " + rdb.readAllSuitesByProject(project).get(0));
 			suite = rdb.readAllSuitesByProject(project).get(0);
+			inisTest = suite.getInisTests().get(0);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Test
-	public void updateSuite() {
-		suite.setProject(project);
-		suite.setName(SUITE_NEW_NAME);
-		suite.setDescription(SUITE_NEW_DESCRIPTION);
+	public void updateInisTest() {
+		inisTest.setBrowser(INIS_TEST_NEW_BROWSER);
+		inisTest.setName(INIS_TEST_NEW_NAME);
+		inisTest.setDescription(INIS_TEST_NEW_DESCRIPTION);;
+		inisTest.setSuite(suite);
 
-		udb.updateSuite(suite);
+		udb.updateInisTest(inisTest);
 	}
 	
-	@Test(dependsOnMethods = { "updateSuite" })
-	public void isSuiteUpdated() throws SQLException {
-		suite = rdb.readAllSuitesByProject(project).get(0);
+	@Test(dependsOnMethods = { "updateInisTest" })
+	public void isInisTestUpdated() throws SQLException {
+		inisTest = rdb.readAllTestsBySuite(suite).get(0);
 
-		Assert.assertTrue(suite.getName().equals(SUITE_NEW_NAME), "ERROR: Suite name " + suite.getName() + " in DB is != " + SUITE_NEW_NAME);
-		Assert.assertTrue(suite.getDescription().equals(SUITE_NEW_DESCRIPTION), "ERROR: Suite description " + suite.getDescription() + " in DB is != " + SUITE_NEW_DESCRIPTION);
-		Assert.assertTrue(suite.getProject().getId() == PROJECT_ID, "ERROR: Project Id " + suite.getProject().getId() + " in DB is != " + PROJECT_ID);
+		Assert.assertTrue(inisTest.getName().equals(INIS_TEST_NEW_NAME), "ERROR: InisTest name " + inisTest.getName() + " in DB is != " + INIS_TEST_NEW_NAME);
+		Assert.assertTrue(inisTest.getDescription().equals(INIS_TEST_NEW_DESCRIPTION), "ERROR: InisTest description " + inisTest.getDescription() + " in DB is != " + INIS_TEST_NEW_DESCRIPTION);
 	}
 
 	@AfterClass

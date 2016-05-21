@@ -59,6 +59,7 @@ public class TestUpdateProjectDatabase {
 	public void teardown() {
 		rdb.disconnect();
 		udb.disconnect();
+		System.out.println("======================Finished test " + this.getClass().getSimpleName() + "======================");
 	}
 
 }

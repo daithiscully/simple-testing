@@ -44,6 +44,7 @@ public class InsertDeleteProjectInDatabaseTest {
 		
 		dbc.disconnect();
 		ddbc.disconnect();
+		System.out.println("======================Finished test " + this.getClass().getSimpleName() + "======================");
 	}
 
 	@Test
